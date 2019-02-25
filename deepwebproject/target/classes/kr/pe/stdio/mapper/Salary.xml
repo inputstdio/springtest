@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.pe.stdio.service.SalaryDao">
+	<resultMap type="kr.pe.stdio.entities.Salary" id="salaryMap"></resultMap>
+	<resultMap type="kr.pe.stdio.entities.SalaryRoll" id="salaryRollMap"></resultMap>
+	<select id="selectSalaryAll" resultMap="salaryMap">
+		SELECT * FROM salary WHERE yn = 'y'
+	</select>
+	<select id="selectCountRow" parameterType="String" resultType="Integer">
+		SELECT COUNT(*) FROM salary WHERE empno=#{empno}
+	</select>
+	<insert id="insertRow" parameterType="hashMap">
+		INSERT INTO salary(empno, dept, name, partner, dependent20, dependent60, disabled, womanpower, pay, extra, birth_date, input_date, yn
+		) VALUES (
+			#{empno, jdbcType=VARCHAR}, #{dept, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, #{partner, jdbcType=INTEGER}, 
+			#{dependent20, jdbcType=INTEGER}, #{dependent60, jdbcType=INTEGER}, #{disabled, jdbcType=INTEGER}, 
+			#{womanpower, jdbcType=INTEGER}, #{pay, jdbcType=INTEGER}, #{extra, jdbcType=INTEGER}, 
+			#{birth_date, jdbcType=VARCHAR}, #{input_date, jdbcType=VARCHAR}, #{yn, jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSalaryRollRow" parameterType="hashMap">
+		INSERT INTO salaryroll(yyyy, mm, empno, dept, name, partner, dependent20, dependent60, disabled, womanpower, pay12, sumpay, 
+		incomededuction, incomeamount, personaldeduction, annuityinsurance, specialdeduction, standardamount, calculatedtax, incometax, 
+		deduction, decidedtax, simpletax, finalpay
+		) VALUES (
+			#{yyyy, jdbcType=VARCHAR}, #{mm, jdbcType=VARCHAR}, #{empno, jdbcType=VARCHAR}, #{dept, jdbcType=VARCHAR}, 
+			#{name, jdbcType=VARCHAR}, #{partner, jdbcType=INTEGER}, #{dependent20, jdbcType=INTEGER}, #{dependent60, jdbcType=INTEGER}, 
+			#{disabled, jdbcType=INTEGER}, #{womanpower, jdbcType=INTEGER}, #{pay12, jdbcType=INTEGER}, #{sumpay, jdbcType=INTEGER}, 
+			#{incomededuction, jdbcType=INTEGER}, #{incomeamount, jdbcType=INTEGER}, #{personaldeduction, jdbcType=INTEGER}, 
+			#{annuityinsurance, jdbcType=INTEGER}, #{specialdeduction, jdbcType=INTEGER}, #{standardamount, jdbcType=INTEGER}, 
+			#{calculatedtax, jdbcType=INTEGER}, #{incometax, jdbcType=INTEGER}, #{deduction, jdbcType=INTEGER}, 
+			#{decidedtax, jdbcType=INTEGER}, #{simpletax, jdbcType=INTEGER}, #{finalpay, jdbcType=INTEGER}
+		)
+	</insert>
+	<select id="selectSalaryRollAll" resultMap="salaryRollMap">
+		SELECT * FROM salaryroll;
+	</select>
+	<delete id="deleteSalaryRoll" parameterType="hashMap">
+		DELETE FROM salaryroll WHERE yyyy=#{yyyy} AND mm=#{mm}
+	</delete>
+	
+	<select id="salaryRollList" parameterType="hashMap" resultMap="salaryRollMap">
+		select ifnull(yyyy,'총계') as yyyy, ifnull(mm,'총계') 
+		as mm, ifnull(dept,'소계') as dept, 
+		ifnull(empno,'부서소계') as empno, name, 
+		sum(pay12 / 12) as sumpay,sum(incomededuction/12) incomededuction,
+		sum(incomeamount/12) incomeamount,sum(personaldeduction/12) personaldeduction,
+		sum(annuityinsurance/12) annuityinsurance,sum(specialdeduction/12) specialdeduction,
+		sum(standardamount/12) standardamount,sum(calculatedtax/12) calculatedtax,
+		sum(incometax/12) incometaxdeduction,sum(decidedtax/12) decidedtax,
+		sum(simpletax) simpletax
+		from salaryroll 
+		where yyyy=#{yyyy} and mm=#{mm}
+		group by yyyy, mm, dept, empno with rollup
+   </select>
+</mapper>

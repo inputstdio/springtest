@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.pe.stdio.service.MemberDao">
+	<resultMap type="kr.pe.stdio.entities.Member" id="memberMap"></resultMap>
+	<select id="selectCheck" parameterType="String" resultType="int">
+		SELECT count(*) FROM member WHERE email=#{input_email}	<!-- input_email : MemberDAO의 selectCheck 함수에서 받아오는 파라미터 -->
+	</select>
+	
+	<insert id="insertRow" parameterType="hashMap">
+		INSERT INTO member(email, password, name, phone, zipcode, address1, address2, photo, input_date
+		) VALUES (
+			#{email, jdbcType=VARCHAR}, #{password, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, #{phone, jdbcType=VARCHAR},
+			#{zipcode, jdbcType=VARCHAR}, #{address1, jdbcType=VARCHAR}, #{address2, jdbcType=VARCHAR}, #{photo, jdbcType=VARCHAR},
+			#{input_date, jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<select id="selectAll" resultMap="memberMap">
+		SELECT * FROM member;
+	</select>
+	
+	<select id="selectOne" parameterType="String" resultMap="memberMap">
+		SELECT * FROM member WHERE email=#{email}
+	</select>
+	
+	<update id="updateRow" parameterType="hashMap">
+		UPDATE member SET password=#{password, jdbcType=VARCHAR}, name=#{name, jdbcType=VARCHAR}, phone=#{phone, jdbcType=VARCHAR},
+		zipcode=#{zipcode, jdbcType=VARCHAR}, address1=#{address1, jdbcType=VARCHAR}, address2=#{address2, jdbcType=VARCHAR}, photo=#{photo, jdbcType=VARCHAR},
+		level=#{level, jdbcType=INTEGER} 
+		WHERE email=#{email}
+	</update>
+	
+	<update id="updateLevelAll" parameterType="hashmap">
+		UPDATE member SET level=#{level, jdbcType=INTEGER} WHERE email=#{email}
+	</update>
+	
+	<delete id="deleteOne" parameterType="String">
+		DELETE FROM member WHERE email=#{email}
+	</delete>
+	
+</mapper>

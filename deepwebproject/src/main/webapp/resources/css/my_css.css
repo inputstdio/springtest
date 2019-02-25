@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+body {
+	background-color: #3399ff;
+	font-family: "Malgun Gothic", "NanumGothic";
+}
+
+a:link {
+	text-decoration: none;
+	color: #333333;
+}
+
+a:visited {
+	text-decoration: none;
+	color: #333333;
+}
+
+a:active {
+	text-decoration: none;
+	color: #333333;
+}
+
+a:hover {
+	text-decoration: none;
+	color: white;
+}
+
+button.btn_sty1 {
+	width: 100%;
+	font-weight: bold;
+}
+
+button.btn_sty2 {
+	min-width: 30px;
+	font-weight: bold;
+}
+
+button.btn_sty3 {
+	font-weight: bold;
+	margin-top: 2px;
+}
+
+button.btn_sty4 {
+	font-weight: bold;
+	margin-top: 2px;
+	width: 100%;
+}
+
+button.btn_sty5 {
+	margin-top: 2%;
+	margin-bottom: 2%;
+	color: white;
+	font-weight: bold;
+	width: 100%;
+	min-width: 130px;
+}
+button.btn_sty6 {
+	width: 20%;
+	font-weight: bold;
+}

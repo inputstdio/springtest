@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.pe.stdio.service.BoardDao">
+	<resultMap type="kr.pe.stdio.entities.Board" id="boardMap"></resultMap>
+	<insert id="insertRow" parameterType="hashMap">
+		INSERT INTO board(b_seq, b_email, b_name, b_password, b_title, b_content, b_ip, b_ref, b_step, b_hit, b_level, b_attach, b_date
+		) VALUES (
+		(SELECT IFNULL(MAX(b_seq)+1,1) FROM board alias_seq),
+		#{b_email, jdbcType=VARCHAR}, #{b_name, jdbcType=VARCHAR}, #{b_password, jdbcType=VARCHAR}, #{b_title, jdbcType=VARCHAR},
+		#{b_content, jdbcType=LONGVARCHAR}, #{b_ip, jdbcType=VARCHAR}, (SELECT IFNULL(MAX(b_seq)+1,1) FROM board alias_seq), 0, 0, #{b_level, jdbcType=INTEGER}, #{b_attach, jdbcType=VARCHAR},
+		#{b_date, jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertReplyRow" parameterType="hashMap">
+		INSERT INTO board(b_seq, b_email, b_name, b_password, b_title, b_content, b_ip, b_ref, b_step, b_hit, b_level, b_attach, b_date
+		) VALUES (
+		(SELECT IFNULL(MAX(b_seq)+1,1) FROM board alias_seq),
+		#{b_email, jdbcType=VARCHAR}, #{b_name, jdbcType=VARCHAR}, #{b_password, jdbcType=VARCHAR}, #{b_title, jdbcType=VARCHAR},
+		#{b_content, jdbcType=LONGVARCHAR}, #{b_ip, jdbcType=VARCHAR}, #{b_ref, jdbcType=VARCHAR}, 1, 0, #{b_level, jdbcType=INTEGER}, #{b_attach, jdbcType=VARCHAR},
+		#{b_date, jdbcType=VARCHAR}
+		)
+	</insert>
+	<select id="selectMaxSeq" resultType="int">
+		SELECT IFNULL(MAX(b_seq)+1,1) FROM board alias_seq
+	</select>
+	<select id="selectRowCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM board 
+		WHERE b_title LIKE CONCAT('%',#{search},'%') OR b_name LIKE CONCAT('%',#{search},'%') OR b_email LIKE CONCAT('%',#{search},'%')
+	</select>
+	<select id="selectAll" parameterType="String" resultMap="boardMap">
+		SELECT * FROM board 
+		WHERE b_title LIKE CONCAT('%',#{search},'%') OR b_name LIKE CONCAT('%',#{search},'%') OR b_email LIKE CONCAT('%',#{search},'%') 
+		ORDER BY b_ref DESC
+	</select>
+	<select id="selectPage" parameterType="hashmap" resultMap="boardMap">
+		SELECT * FROM board 
+		WHERE b_title LIKE CONCAT('%',#{search},'%') OR b_name LIKE CONCAT('%',#{search},'%') OR b_email LIKE CONCAT('%',#{search},'%') 
+		ORDER BY b_ref DESC 
+		LIMIT #{startrow}, #{size}
+	</select>
+	<select id="selectBoard" parameterType="int" resultMap="boardMap">
+		SELECT * FROM board WHERE b_seq=#{b_seq}
+	</select>
+	<update id="updateHit" parameterType="int">
+		UPDATE board SET b_hit = b_hit + 1 WHERE b_seq=#{b_seq}
+	</update>
+	<delete id="deleteRow" parameterType="int">
+		DELETE FROM board WHERE b_seq=#{b_seq}
+	</delete>
+	
+	<update id="updateRow" parameterType="hashMap">
+		UPDATE board SET b_title=#{b_title, jdbcType=VARCHAR}, 
+		b_date=#{b_date, jdbcType=VARCHAR}, b_content=#{b_content, jdbcType=LONGVARCHAR}, b_attach=#{b_attach, jdbcType=VARCHAR} 
+		WHERE b_seq=#{b_seq}
+	</update> 
+</mapper>

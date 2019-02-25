@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.pe.stdio.service.BuyDao">
+	<resultMap type="kr.pe.stdio.entities.Buy" id="buyMap"></resultMap>
+	<select id="selectAll" resultMap="buyMap">
+		SELECT * FROM buy
+	</select>
+	<select id="selectNo" parameterType="hashMap" resultType="Integer">
+		SELECT DISTINCT no FROM buy
+		WHERE vendcode=#{vendcode} AND yyyy=#{yyyy} AND mm=#{mm} AND dd=#{dd}
+	</select>
+	<select id="selectSequenceNo" parameterType="hashMap" resultType="Integer">
+		SELECT IFNULL(MAX(no)+1, 1) FROM buy
+		WHERE yyyy=#{yyyy} AND mm=#{mm} AND dd=#{dd}
+	</select>
+	<select id="selectSequenceHanf" parameterType="hashMap" resultType="Integer">
+		SELECT IFNULL(MAX(hanf)+1, 1) FROM buy
+		WHERE vendcode=#{vendcode} AND yyyy=#{yyyy} AND mm=#{mm} AND dd=#{dd}
+	</select>
+	<insert id="insertRow" parameterType="hashMap">
+		INSERT INTO buy (seq, vendcode, vendname, yyyy, mm, dd, no, hanf, procode, proname, price, qty, total, memo
+		) VALUES ( 
+			(SELECT IFNULL(MAX(seq)+1,1) FROM buy alias_seq), #{vendcode, jdbcType=VARCHAR}, #{vendname, jdbcType=VARCHAR}, 
+			#{yyyy, jdbcType=VARCHAR}, #{mm, jdbcType=VARCHAR}, #{dd, jdbcType=VARCHAR}, 
+			#{no, jdbcType=INTEGER}, #{hanf, jdbcType=INTEGER}, #{procode, jdbcType=VARCHAR}, #{proname, jdbcType=VARCHAR}, 
+			#{price, jdbcType=INTEGER}, #{qty, jdbcType=INTEGER}, #{total, jdbcType=INTEGER}, #{memo, jdbcType=VARCHAR}
+		)
+	</insert>
+	<select id="selectSearch" parameterType="hashmap" resultMap="buyMap">
+		SELECT * FROM buy 
+		WHERE vendname LIKE CONCAT('%',#{vendname},'%') OR yyyy LIKE CONCAT('%',#{yyyy},'%') OR mm LIKE CONCAT('%',#{mm},'%') OR dd LIKE CONCAT('%',#{dd},'%') 
+	</select>
+	
+	<select id="selectRow" parameterType="Integer" resultMap="buyMap">
+		SELECT A.*, stock FROM buy A, product B WHERE seq=#{seq} AND procode = code
+	</select>
+	
+	<select id="selectBuySearchRollup" resultMap="buyMap" parameterType="hashmap">
+		SELECT seq, vendcode, yyyy, mm, dd, no, hanf, B.name vendname, procode, C.name proname, price, SUM(qty) qty, SUM(price * qty) total, memo 
+		FROM buy A, vender B, product C 
+		WHERE vendcode=#{vendcode} AND yyyy=#{yyyy} AND mm=#{mm} AND dd=#{dd} AND A.vendcode=B.code AND A.procode=C.code 
+		GROUP BY no, hanf WITH ROLLUP
+	</select>
+	
+	<select id="selectBuySearchRollupMM" resultMap="buyMap" parameterType="hashmap">
+		SELECT seq, vendcode, yyyy, mm, dd, no, hanf, B.name vendname, procode, C.name proname, price, SUM(qty) qty, SUM(price * qty) total, memo 
+		FROM buy A, vender B, product C 
+		WHERE vendcode=#{vendcode} AND yyyy=#{yyyy} AND mm=#{mm} AND A.vendcode=B.code AND A.procode=C.code 
+		GROUP BY dd, hanf WITH ROLLUP
+	</select>
+	
+	
+	<insert id="insertBuyBalance" parameterType="hashmap">
+		INSERT INTO balance (yyyy, vendcode, vendname, ${dealcolumn}, ${balancecolumn}, balance
+		) VALUES (
+			#{yyyy, jdbcType=VARCHAR}, #{vendcode, jdbcType=VARCHAR}, #{vendname, jdbcType=VARCHAR},
+			#{price} * #{qty}, #{price} * #{qty}, #{price} * #{qty}
+		) ON DUPLICATE KEY UPDATE
+		${dealcolumn} = ${dealcolumn} + #{price} * #{qty}, 
+		${balancecolumn} = ${balancecolumn} + #{price} * #{qty}, balance = balance + #{price} * #{qty}
+	</insert>
+	
+	<update id="updateRow" parameterType="HashMap">
+		UPDATE buy SET price=#{price, jdbcType=INTEGER}, qty=#{qty, jdbcType=INTEGER},  
+		total=#{total, jdbcType=INTEGER}, memo=#{memo, jdbcType=VARCHAR} 
+		WHERE seq=#{seq}
+	</update>
+	
+	<delete id="deleteRow" parameterType="Integer">
+		DELETE FROM buy WHERE seq=#{seq}
+	</delete> 
+</mapper>

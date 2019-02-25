@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+span.title {
+	font-size: 45px;
+	font-weight: bold;
+	color: white;
+	text-shadow: 2px 2px 2px black;
+}
+
+label {
+	font-size: 20px;
+	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+
+table, tr, td {
+	border: 3px solid white;
+	padding: 3px;
+}
+
+table {
+	width: 100%;
+}
+
+thead {
+	background-color: #0066ff;
+	font-size: 22px;
+	color: white;
+	font-weight: bold;
+}
+
+tbody {
+	background-color: #ccd9ff;
+	font-size: 15px;
+}
+
+td.title {
+	min-width: 130px;
+}
+
+td.hit {
+	min-width: 50px;
+}
+div>a:link {color: white;}
+div>a:visited {color: white;}
+div>a:active {color: white;}
+div>a:hover {color: #333333;}
+a:hover {color: #0066ff;}

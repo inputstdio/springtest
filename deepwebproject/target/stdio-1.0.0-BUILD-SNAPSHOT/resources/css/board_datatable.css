@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+
+label {
+	font-size: 20px;
+	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+
+table, tr, td {
+	border: 1px solid white;
+}
+
+thead {
+	font-weight: bold;
+	background-color: #0066ff;
+	color: white;
+}
+
+tbody {
+	background-color: #ccd9ff;
+}
+
+#example_info {
+	color: white;
+}
+
+div>a:link {
+	color: white;
+}
+
+div>a:visited {
+	color: white;
+}
+
+div>a:active {
+	color: white;
+}
+
+div>a:hover {
+	color: #333333;
+}
+
+a:hover {
+	color: #0066ff;
+}

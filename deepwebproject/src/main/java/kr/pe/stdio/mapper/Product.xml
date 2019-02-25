@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.pe.stdio.service.ProductDao">
+	<resultMap type="kr.pe.stdio.entities.Product" id="productMap"></resultMap>
+	<insert id="insertRow" parameterType="hashMap">
+		INSERT INTO product( code, name, capacity, buyprice, saleprice, preyystock, premmstock, preddstock, 
+			buy01, buy02, buy03, buy04, buy05, buy06, buy07, buy08, buy09, buy10, buy11, buy12, 
+			sale01, sale02, sale03, sale04, sale05, sale06, sale07, sale08, sale09, sale10, sale11, sale12, 
+			stock, explanation
+		) VALUES (
+			#{code, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, #{capacity, jdbcType=VARCHAR}, 
+			#{buyprice, jdbcType=INTEGER}, #{saleprice, jdbcType=INTEGER}, 
+			#{preyystock, jdbcType=INTEGER}, #{premmstock, jdbcType=INTEGER}, #{preddstock, jdbcType=INTEGER}, 
+			#{buy01, jdbcType=INTEGER}, #{buy02, jdbcType=INTEGER}, #{buy03, jdbcType=INTEGER},
+			#{buy04, jdbcType=INTEGER}, #{buy05, jdbcType=INTEGER}, #{buy06, jdbcType=INTEGER}, 
+			#{buy07, jdbcType=INTEGER}, #{buy08, jdbcType=INTEGER}, #{buy09, jdbcType=INTEGER}, 
+			#{buy10, jdbcType=INTEGER}, #{buy11, jdbcType=INTEGER}, #{buy12, jdbcType=INTEGER},
+			#{sale01, jdbcType=INTEGER}, #{sale02, jdbcType=INTEGER}, #{sale03, jdbcType=INTEGER},
+			#{sale04, jdbcType=INTEGER}, #{sale05, jdbcType=INTEGER}, #{sale06, jdbcType=INTEGER},
+			#{sale07, jdbcType=INTEGER}, #{sale08, jdbcType=INTEGER}, #{sale09, jdbcType=INTEGER},
+			#{sale10, jdbcType=INTEGER}, #{sale11, jdbcType=INTEGER}, #{sale12, jdbcType=INTEGER},  
+			#{stock, jdbcType=INTEGER}, #{explanation, jdbcType=VARCHAR}
+		)
+	</insert>
+	<select id="selectAll" resultMap="productMap">
+		SELECT * FROM product ORDER BY name ASC
+	</select>
+	<select id="selectRow" parameterType="String" resultMap="productMap">
+		SELECT * FROM product WHERE code=#{code}
+	</select>
+	<delete id="deleteRow" parameterType="String">
+		DELETE FROM product WHERE code=#{code}
+	</delete>
+</mapper>

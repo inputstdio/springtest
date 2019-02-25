@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.pe.stdio.service.BalanceDao">
+	<resultMap type="kr.pe.stdio.entities.Balance" id="balanceMap"></resultMap>
+	<insert id="insertRow" parameterType="hashMap">
+		INSERT INTO balance( yyyy, vendcode, vendname, preyybalance, 
+		prebalance01, prebalance02, prebalance03, prebalance04, prebalance05, prebalance06, 
+		prebalance07, prebalance08, prebalance09, prebalance10, prebalance11, prebalance12, 
+		deal01, deal02, deal03, deal04, deal05, deal06, deal07, deal08, deal09, deal10, deal11, deal12, 
+		cash01, cash02, cash03, cash04, cash05, cash06, cash07, cash08, cash09, cash10, cash11, cash12, 
+		check01, check02, check03, check04, check05, check06, check07, check08, check09, check10, check11, check12, 
+		card01, card02, card03, card04, card05, card06, card07, card08, card09, card10, card11, card12, 
+		etc01, etc02, etc03, etc04, etc05, etc06, etc07, etc08, etc09, etc10, etc11, etc12, 
+		balance01, balance02, balance03, balance04, balance05, balance06, 
+		balance07, balance08, balance09, balance10, balance11, balance12, 
+		balance, dealtot, cashtot, checktot, cardtot, etctot
+		) VALUES (
+			#{yyyy, jdbcType=VARCHAR}, #{vendcode, jdbcType=VARCHAR}, #{vendname, jdbcType=VARCHAR}, 
+			#{preyybalance, jdbcType=INTEGER}, #{prebalance01, jdbcType=INTEGER}, #{prebalance02, jdbcType=INTEGER}, 
+			#{prebalance03, jdbcType=INTEGER}, #{prebalance04, jdbcType=INTEGER}, #{prebalance05, jdbcType=INTEGER}, 
+			#{prebalance06, jdbcType=INTEGER}, #{prebalance07, jdbcType=INTEGER}, #{prebalance08, jdbcType=INTEGER}, 
+			#{prebalance09, jdbcType=INTEGER}, #{prebalance10, jdbcType=INTEGER}, #{prebalance11, jdbcType=INTEGER}, 
+			#{prebalance12, jdbcType=INTEGER}, #{deal01, jdbcType=INTEGER}, #{deal02, jdbcType=INTEGER}, 
+			#{deal03, jdbcType=INTEGER}, #{deal04, jdbcType=INTEGER}, #{deal05, jdbcType=INTEGER}, 
+			#{deal06, jdbcType=INTEGER}, #{deal07, jdbcType=INTEGER}, #{deal08, jdbcType=INTEGER}, 
+			#{deal09, jdbcType=INTEGER}, #{deal10, jdbcType=INTEGER}, #{deal11, jdbcType=INTEGER}, 
+			#{deal12, jdbcType=INTEGER}, #{cash01, jdbcType=INTEGER}, #{cash02, jdbcType=INTEGER}, 
+			#{cash03, jdbcType=INTEGER}, #{cash04, jdbcType=INTEGER}, #{cash05, jdbcType=INTEGER}, 
+			#{cash06, jdbcType=INTEGER}, #{cash07, jdbcType=INTEGER}, #{cash08, jdbcType=INTEGER}, 
+			#{cash09, jdbcType=INTEGER}, #{cash10, jdbcType=INTEGER}, #{cash11, jdbcType=INTEGER}, 
+			#{cash12, jdbcType=INTEGER}, #{check01, jdbcType=INTEGER}, #{check02, jdbcType=INTEGER}, 
+			#{check03, jdbcType=INTEGER}, #{check04, jdbcType=INTEGER}, #{check05, jdbcType=INTEGER}, 
+			#{check06, jdbcType=INTEGER}, #{check07, jdbcType=INTEGER}, #{check08, jdbcType=INTEGER}, 
+			#{check09, jdbcType=INTEGER}, #{check10, jdbcType=INTEGER}, #{check11, jdbcType=INTEGER}, 
+			#{check12, jdbcType=INTEGER}, #{card01, jdbcType=INTEGER}, #{card02, jdbcType=INTEGER}, 
+			#{card03, jdbcType=INTEGER}, #{card04, jdbcType=INTEGER}, #{card05, jdbcType=INTEGER}, 
+			#{card06, jdbcType=INTEGER}, #{card07, jdbcType=INTEGER}, #{card08, jdbcType=INTEGER}, 
+			#{card09, jdbcType=INTEGER}, #{card10, jdbcType=INTEGER}, #{card11, jdbcType=INTEGER}, 
+			#{card12, jdbcType=INTEGER}, #{etc01, jdbcType=INTEGER}, #{etc02, jdbcType=INTEGER}, 
+			#{etc03, jdbcType=INTEGER}, #{etc04, jdbcType=INTEGER}, #{etc05, jdbcType=INTEGER}, 
+			#{etc06, jdbcType=INTEGER}, #{etc07, jdbcType=INTEGER}, #{etc08, jdbcType=INTEGER}, 
+			#{etc09, jdbcType=INTEGER}, #{etc10, jdbcType=INTEGER}, #{etc11, jdbcType=INTEGER}, 
+			#{etc12, jdbcType=INTEGER}, #{balance01, jdbcType=INTEGER}, #{balance02, jdbcType=INTEGER}, 
+			#{balance03, jdbcType=INTEGER}, #{balance04, jdbcType=INTEGER}, #{balance05, jdbcType=INTEGER}, 
+			#{balance06, jdbcType=INTEGER}, #{balance07, jdbcType=INTEGER}, #{balance08, jdbcType=INTEGER}, 
+			#{balance09, jdbcType=INTEGER}, #{balance10, jdbcType=INTEGER}, #{balance11, jdbcType=INTEGER}, 
+			#{balance12, jdbcType=INTEGER}, #{balance, jdbcType=INTEGER}, #{dealtot, jdbcType=INTEGER}, #{cashtot, jdbcType=INTEGER}, 
+			#{checktot, jdbcType=INTEGER}, #{cardtot, jdbcType=INTEGER}, #{etctot, jdbcType=INTEGER}
+		)
+	</insert>
+	<select id="selectAll" resultMap="balanceMap">
+		SELECT * FROM balance
+	</select>
+	<select id="selectRow" resultMap="balanceMap" parameterType="hashmap">
+		SELECT * FROM balance WHERE yyyy=#{yyyy} AND vendcode=#{vendcode}
+	</select>
+	<delete id="deleteRow" parameterType="hashmap">
+		DELETE FROM balance WHERE yyyy=#{yyyy} AND vendcode=#{vendcode}
+	</delete>
+	<update id="updateRow" parameterType="hashMap">
+		UPDATE balance SET 
+			preyybalance=#{preyybalance, jdbcType=INTEGER}, prebalance01=#{prebalance01, jdbcType=INTEGER}, prebalance02=#{prebalance02, jdbcType=INTEGER}, 
+			prebalance03=#{prebalance03, jdbcType=INTEGER}, prebalance04=#{prebalance04, jdbcType=INTEGER}, prebalance05=#{prebalance05, jdbcType=INTEGER}, 
+			prebalance06=#{prebalance06, jdbcType=INTEGER}, prebalance07=#{prebalance07, jdbcType=INTEGER}, prebalance08=#{prebalance08, jdbcType=INTEGER}, 
+			prebalance09=#{prebalance09, jdbcType=INTEGER}, prebalance10=#{prebalance10, jdbcType=INTEGER}, prebalance11=#{prebalance11, jdbcType=INTEGER}, 
+			prebalance12=#{prebalance12, jdbcType=INTEGER}, deal01=#{deal01, jdbcType=INTEGER}, deal02=#{deal02, jdbcType=INTEGER}, 
+			deal03=#{deal03, jdbcType=INTEGER}, deal04=#{deal04, jdbcType=INTEGER}, deal05=#{deal05, jdbcType=INTEGER}, 
+			deal06=#{deal06, jdbcType=INTEGER}, deal07=#{deal07, jdbcType=INTEGER}, deal08=#{deal08, jdbcType=INTEGER}, 
+			deal09=#{deal09, jdbcType=INTEGER}, deal10=#{deal10, jdbcType=INTEGER}, deal11=#{deal11, jdbcType=INTEGER}, 
+			deal12=#{deal12, jdbcType=INTEGER}, cash01=#{cash01, jdbcType=INTEGER}, cash02=#{cash02, jdbcType=INTEGER}, 
+			cash03=#{cash03, jdbcType=INTEGER}, cash04=#{cash04, jdbcType=INTEGER}, cash05=#{cash05, jdbcType=INTEGER}, 
+			cash06=#{cash06, jdbcType=INTEGER}, cash07=#{cash07, jdbcType=INTEGER}, cash08=#{cash08, jdbcType=INTEGER}, 
+			cash09=#{cash09, jdbcType=INTEGER}, cash10=#{cash10, jdbcType=INTEGER}, cash11=#{cash11, jdbcType=INTEGER}, 
+			cash12=#{cash12, jdbcType=INTEGER}, check01=#{check01, jdbcType=INTEGER}, check02=#{check02, jdbcType=INTEGER}, 
+			check03=#{check03, jdbcType=INTEGER}, check04=#{check04, jdbcType=INTEGER}, check05=#{check05, jdbcType=INTEGER}, 
+			check06=#{check06, jdbcType=INTEGER}, check07=#{check07, jdbcType=INTEGER}, check08=#{check08, jdbcType=INTEGER}, 
+			check09=#{check09, jdbcType=INTEGER}, check10=#{check10, jdbcType=INTEGER}, check11=#{check11, jdbcType=INTEGER}, 
+			check12=#{check12, jdbcType=INTEGER}, card01=#{card01, jdbcType=INTEGER}, card02=#{card02, jdbcType=INTEGER}, 
+			card03=#{card03, jdbcType=INTEGER}, card04=#{card04, jdbcType=INTEGER}, card05=#{card05, jdbcType=INTEGER}, 
+			card06=#{card06, jdbcType=INTEGER}, card07=#{card07, jdbcType=INTEGER}, card08=#{card08, jdbcType=INTEGER}, 
+			card09=#{card09, jdbcType=INTEGER}, card10=#{card10, jdbcType=INTEGER}, card11=#{card11, jdbcType=INTEGER}, 
+			card12=#{card12, jdbcType=INTEGER}, etc01=#{etc01, jdbcType=INTEGER}, etc02=#{etc02, jdbcType=INTEGER}, 
+			etc03=#{etc03, jdbcType=INTEGER}, etc04=#{etc04, jdbcType=INTEGER}, etc05=#{etc05, jdbcType=INTEGER}, 
+			etc06=#{etc06, jdbcType=INTEGER}, etc07=#{etc07, jdbcType=INTEGER}, etc08=#{etc08, jdbcType=INTEGER}, 
+			etc09=#{etc09, jdbcType=INTEGER}, etc10=#{etc10, jdbcType=INTEGER}, etc11=#{etc11, jdbcType=INTEGER}, 
+			etc12=#{etc12, jdbcType=INTEGER}, balance01=#{balance01, jdbcType=INTEGER}, balance02=#{balance02, jdbcType=INTEGER}, 
+			balance03=#{balance03, jdbcType=INTEGER}, balance04=#{balance04, jdbcType=INTEGER}, balance05=#{balance05, jdbcType=INTEGER}, 
+			balance06=#{balance06, jdbcType=INTEGER}, balance07=#{balance07, jdbcType=INTEGER}, balance08=#{balance08, jdbcType=INTEGER}, 
+			balance09=#{balance09, jdbcType=INTEGER}, balance10=#{balance10, jdbcType=INTEGER}, balance11=#{balance11, jdbcType=INTEGER}, 
+			balance12=#{balance12, jdbcType=INTEGER}
+		WHERE yyyy=#{yyyy} AND vendcode=#{vendcode}
+	</update>
+	<update id="updateRowTotal" parameterType="hashMap">
+		UPDATE balance SET 
+			balance=(Balance01 + Balance02 + Balance03 + Balance04 + Balance05 +Balance06 + Balance07 + Balance08 + Balance09 + Balance10 + Balance11 + Balance12), 
+			dealtot=(Deal01 + Deal02 + Deal03 + Deal04 + Deal05 +Deal06 + Deal07 + Deal08 + Deal09 + Deal10 + Deal11 + Deal12), 
+			cashtot=(Cash01 + Cash02 + Cash03 + Cash04 + Cash05 +Cash06 + Cash07 + Cash08 + Cash09 + Cash10 + Cash11 + Cash12), 
+			checktot=(Check01 + Check02 + Check03 + Check04 + Check05 + Check06 + Check07 + Check08 + Check09 + Check10 + Check11 + Check12), 
+			cardtot=(Card01 + Card02 + Card03 + Card04 + Card05 +Card06 + Card07 + Card08 + Card09 + Card10 + Card11 + Card12), 
+			etctot=(Etc01 + Etc02 + Etc03 + Etc04 + Etc05 +Etc06+ Etc07 + Etc08 + Etc09 + Etc10 + Etc11 + Etc12)
+		WHERE yyyy=#{yyyy} AND vendcode=#{vendcode}
+	</update>
+</mapper>

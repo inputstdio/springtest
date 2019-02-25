@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+input[type="text"]:read-only:not([read-only="false"]) { 
+	background-color: #e6f2ff;
+}
+.title {
+	font-size: 40px;
+	font-weight: bold;
+	color: white;
+	text-shadow: 2px 2px 2px black;
+}
+
+a:link {
+	text-decoration: none;
+	color: #333333;
+}
+
+a:visited {
+	text-decoration: none;
+	color: #333333;
+}
+
+a:active {
+	text-decoration: none;
+	color: #333333;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #337ab7;
+}
+
+.addon1 {
+	min-width: 105px;
+}
+
+.addon2 {
+	width: 0px;
+	padding-left: 1px;
+	padding-right: 1px;
+}
+
+ul.parsley-errors-list {
+	padding: 0px;
+	margin: 0px;
+	padding-left: 2px;
+	background-color: white;
+	border: 1px solid #CCCCCC;
+	border-top: 0px;
+}
+
+li {
+	padding-left: 2px;
+	text-align: left;
+	color: #999999;
+	list-style: none;
+}
+
+table, tr, td {
+	border: 3px solid white;
+	padding: 3px;
+}
+
+table {
+	width: 100%;
+}
+
+thead {
+	background-color: #0066ff;
+	font-size: 15px;
+	color: white;
+	font-weight: bold;
+}
+
+tbody {
+	background-color: #ccd9ff;
+	font-size: 15px;
+}
+
+td.total {
+	background-color: #0066ff;
+	color: white;
+}

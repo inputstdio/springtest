@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+label {
+	font-size: 20px;
+	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+
+tr, td, th {
+	border: 1px solid white;
+}
+
+table {
+	border: 3px solid white;
+	border-radius: 3px;
+}
+
+thead, tfoot {
+	font-weight: bold;
+	background-color: #0066ff;
+	color: white;
+}
+
+tbody {
+	background-color: #ccd9ff;
+}
+
+.dataTables_info {
+	color: white;
+}
+
+table.dataTable thead .sorting:after {
+	display: none;
+}
+
+table.dataTable thead .sorting:before {
+	display: none;
+}
+
+table.dataTable thead .sorting_asc:after {
+	display: none;
+}
+
+table.dataTable thead .sorting_asc:before {
+	display: none;
+}
+
+table.dataTable thead .sorting_desc:after {
+	display: none;
+}
+
+table.dataTable thead .sorting_desc:before {
+	display: none;
+}
+
+table.dataTable thead>tr>td.sorting {
+	text-align: center;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+table.dataTable thead>tr>td.sorting_asc {
+	text-align: center;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+table.dataTable thead>tr>td.sorting_desc {
+	text-align: center;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+div.dataTables_wrapper div.dataTables_length label, div.dataTables_wrapper div.dataTables_filter label {
+	font-weight: bold;
+}

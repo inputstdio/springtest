@@ -1,0 +1,41 @@
+@charset "UTF-8";
+ 	label {
+		font-size: 20px;
+		text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+	}
+	table, tr, td {
+		border: 3px solid white;
+		padding: 3px;
+	}
+	table {
+		width: 100%;
+	}
+	thead {
+		background-color: #0066ff;
+		font-size: 22px;
+		color: white;
+		font-weight: bold;
+	}
+	tbody {
+		background-color: #ccd9ff;
+		font-size: 15px;
+	}
+	td.img {
+		width: 70px;
+		height: 70px;
+	}
+	td.email {
+		width: 130px;
+	}
+	td.check {
+		width: 40px;
+	}
+	input[type=checkbox] {
+		/* Double-sized Checkboxes */
+		-ms-transform: scale(1.5); /* IE */
+		-moz-transform: scale(1.5); /* FF */
+		-webkit-transform: scale(1.5); /* Safari and Chrome */
+		-o-transform: scale(1.5); /* Opera */
+		padding: 10px;
+		margin: 2px;
+	}

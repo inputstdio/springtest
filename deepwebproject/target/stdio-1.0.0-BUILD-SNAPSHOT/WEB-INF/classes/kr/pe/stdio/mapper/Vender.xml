@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.pe.stdio.service.VenderDao">
+	<resultMap type="kr.pe.stdio.entities.Vender" id="venderMap"></resultMap>
+	<insert id="insertRow" parameterType="hashMap">
+		INSERT INTO vender( code, name, busno1, busno2, busno3, ceoname, bustype, busconditions, zipcode, newaddr, oldaddr, detailaddr, officeno1, officeno2, officeno3 
+		) VALUES (
+			#{code, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, 
+			#{busno1, jdbcType=VARCHAR}, #{busno2, jdbcType=VARCHAR}, #{busno3, jdbcType=VARCHAR}, 
+			#{ceoname, jdbcType=VARCHAR}, #{bustype, jdbcType=VARCHAR}, #{busconditions, jdbcType=VARCHAR}, 
+			#{zipcode, jdbcType=VARCHAR}, #{newaddr, jdbcType=VARCHAR}, #{oldaddr, jdbcType=VARCHAR}, 
+			#{detailaddr, jdbcType=VARCHAR}, #{officeno1, jdbcType=VARCHAR}, 
+			#{officeno2, jdbcType=VARCHAR}, #{officeno3, jdbcType=VARCHAR} 
+		)
+	</insert>
+	<select id="selectAll" resultMap="venderMap">
+		SELECT * FROM vender
+	</select>
+	<delete id="deleteRow" parameterType="String">
+		DELETE FROM vender WHERE code=#{code}
+	</delete>
+</mapper>

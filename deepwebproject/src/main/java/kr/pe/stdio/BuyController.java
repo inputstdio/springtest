@@ -32,6 +32,12 @@ public class BuyController {
 	@Autowired
 	private Product product;
 	
+	@RequestMapping(value = "/deadLine", method = RequestMethod.GET)
+	public String deadLine () {
+		return "buy/deadline";
+	}
+	
+	
 	@RequestMapping(value = "/buy", method = RequestMethod.GET)
 	public String buy(Model model, @ModelAttribute ArrayList<Buy> buys, @ModelAttribute Buy buy, @ModelAttribute("redirectchk") String redirectchk) {
 		VenderDao vender_dao = sqlSession.getMapper(VenderDao.class);

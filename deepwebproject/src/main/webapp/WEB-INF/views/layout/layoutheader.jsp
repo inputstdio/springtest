@@ -57,6 +57,7 @@ img {
 						<li><a href="productList">물품 조회</a>
 						<li><a href="balanceList">거래 현황</a>
 						<li><a href="buy">매입</a>
+						<li><a href="deadLine">마감</a>
 					</ul>
 				</div>
 				<div class="col-md-2">

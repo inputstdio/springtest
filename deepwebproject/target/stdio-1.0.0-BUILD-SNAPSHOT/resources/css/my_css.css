@@ -54,3 +54,7 @@ button.btn_sty5 {
 	width: 100%;
 	min-width: 130px;
 }
+button.btn_sty6 {
+	width: 20%;
+	font-weight: bold;
+}

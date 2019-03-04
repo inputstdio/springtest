@@ -16,7 +16,7 @@
 		)
 	</insert>
 	<select id="selectAll" resultMap="venderMap">
-		SELECT * FROM vender
+		SELECT * FROM vender ORDER BY name ASC
 	</select>
 	<delete id="deleteRow" parameterType="String">
 		DELETE FROM vender WHERE code=#{code}

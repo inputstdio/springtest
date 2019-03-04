@@ -522,7 +522,173 @@ $(document).ready(function() {
 			});
 		}
 	})
+  // product_list.jsp
+	$('.product_check_all').click(function() {
+		$('.product_check_one').prop('checked', this.checked);
+	})
+	$('#product_selected_delete').on('click', function(){
+		var checkbox = [];
+		$("input[name='product_check_one']:checked").each(function(){
+			checkbox.push($(this).val());
+		});
+		if(checkbox.length < 1) {
+			$('.modal_btn2').hide();
+			$('.modal-body').text("삭제할 목록을 선택 하세요.");
+			$('#myModal').modal('show');
+			$('.modal_btn1').on('click', function() {
+				$('#myModal').modal('hide');
+				return;
+			});
+		} else {
+			$('.modal_btn2').show();
+			$('.modal-body').text("선택한 항목을 삭제 합니다.");
+			$('#myModal').modal('show');
+			$('.modal_btn1').on('click', function() {
+				location.replace("productSelectedDelete?code="+checkbox);
+				$('#myModal').modal('hide');
+				return;
+			});
+			$('.modal_btn2').on('click', function() {
+				$('#myModal').modal('hide');
+				return;
+			});
+		}
+	})
+  // balance_detail.jsp
+	$('#balance_delete').click(function() {
+		var yyyy = $('#yyyy').val();
+		var vendcode = $('#vendcode').val();
+		location.replace("balanceDelete?yyyy="+yyyy+"&vendcode="+vendcode);
+	})
+  // buy.jsp
+	$('#buy_new').on('click', function(){
+		alert('new!');
+	})
+	$('#buy_vendcode').on('change', function(){
+		var vendname = $(this).children('option:selected').text();
+		var vendcode = $(this).val();
+		$.ajax({
+			type : 'POST',
+			data : "vendcode=" + vendcode,
+			datatype : 'json',
+			url : 'buyNew',
+			success : function(data){
+				$('#buy_vendname').attr('value', vendname);
+				$('#buy_yyyy').attr('value', data.yyyy);
+				$('#buy_dd').attr('value', data.dd);
+				$('#buy_mm').attr('value', data.mm);
+				$('#buy_no').attr('value', data.no);
+				$('#buy_hanf').attr('value', data.hanf);
+			},
+			error : function(request, status, error) {
+				alert("Error : " + request.status);
+			}
+		})
+	})
+	$('#buy_procodes').on('change', function(){
+		var proname = $(this).children('option:selected').text();
+		var procode = $(this).val();
+		$.ajax({
+			type : 'POST',
+			data : "procode=" + procode,
+			datatype : 'json',
+			url : 'buyNew2',
+			success : function(data){
+				$('#buy_proname').attr('value', proname);
+				$('#buy_procode').attr('value', procode);
+				$('#buy_stock').attr('value', data.stock);
+				$('#buy_price').attr('value', data.saleprice);
+				$('#buy_qty').attr('max', data.stock);
+				$('#buy_qty').attr('value', 0);
+				$('#buy_total').attr('value', 0);
+				$('#buy_qty').focus();
+			},
+			error : function(request, status, error) {
+				alert("Error : " + request.status);
+			}
+		})
+	})
+	$('#buy_qty').on('change', function(){
+		var price = $('#buy_price').val();
+		var qty = $('#buy_qty').val();
+		$('#buy_total').attr('value', price*qty);
+	})
+	$('#buy_search_btn').on('click', function(){
+		var vendcode = $('#buy_search_vendcode').val();
+		var yyyy = $('#buy_search_yyyy').val();
+		var mm = $('#buy_search_mm').val();
+		if (vendcode == null){
+			$('.modal_btn2').hide();
+			$('.modal-body').text("검색 할 거래처를 선택 하세요.");
+			$('#myModal').modal('show');
+			$('.modal_btn1').on('click', function() {
+				$('#myModal').modal('hide');
+				return;
+			});
+		} else if (yyyy == ""){
+			$('.modal_btn2').hide();
+			$('.modal-body').text("검색 할 년도를 입력 하세요.");
+			$('#myModal').modal('show');
+			$('.modal_btn1').on('click', function() {
+				$('#myModal').modal('hide');
+				return;
+			});
+		} else if (mm == null){
+			$('.modal_btn2').hide();
+			$('.modal-body').text("검색 할 달을 입력 하세요.");
+			$('#myModal').modal('show');
+			$('.modal_btn1').on('click', function() {
+				$('#myModal').modal('hide');
+				return;
+			});
+		} else {
+			$('#buySearch').submit();
+		}
+	})
+	$('#buy_update').on('click', function(){
+		$('#buyInsert').attr('action', "buyUpdate");
+		$('#buyInsert').submit();
+	})
+	$('#buy_delete').on('click', function(){
+		var seq = $('#buy_seq').val();
+		location.replace("buyDelete?seq="+seq);
+	})
 });
+
+function selectedSeq(seq){
+	$.ajax({
+		type : 'POST',
+		data : "seq=" + seq,
+		datatype : 'json',
+		url : 'buyDetail',
+		success : function(data){
+			$('#buy_seq').attr('value', data.seq);
+			$('#buy_vendcode').val(data.vendcode).prop("selected", true);
+			$('#buy_yyyy').attr('value', data.yyyy);
+			$('#buy_dd').attr('value', data.dd);
+			$('#buy_mm').attr('value', data.mm);
+			$('#buy_no').attr('value', data.no);
+			$('#buy_hanf').attr('value', data.hanf);
+			$('#buy_proname').attr('value', data.proname);
+			$('#buy_procodes').val(data.procode).prop("selected", true);
+			$('#buy_procode').attr('value', data.procode);
+			$('#buy_stock').attr('value', data.stock);
+			$('#buy_price').attr('value', data.price);
+			$('#buy_qty').attr('max', data.stock);
+			$('#buy_qty').attr('value', data.qty);
+			$('#buy_total').attr('value', data.total);
+			$('#buy_memo').attr('value', data.memo);
+			$('#buy_update').show();
+			$('#buy_delete').show();
+			$('#buy_save').hide();
+			$('#buy_reset').hide();
+		},
+		error : function(request, status, error) {
+			alert("Error : " + request.status);
+		}
+	})
+}
+
 function homeModal(str){
 	if (str == "login"){
 		$('#homeModal').modal('show');

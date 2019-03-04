@@ -6,6 +6,9 @@
 	<script src="resources/js/parsley.min.js"></script>
 	<script src="resources/js/parsley.en.js"></script>
 	<link rel="stylesheet" href="resources/css/login.css">
+	<meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="146801485469-2aha39ul2abc3t2tcggmigkceev74s85.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 <body>
 <form id="login_form" name="login_form" action="memberLogin" method="post" data-parsley-validate>
 	<div class="container" style="text-align: center;">
@@ -27,7 +30,26 @@
 			    </div>
 			    <div style="margin-top: 3px;"><span class="msg_box">${msg}</span></div>
 			    <div><button id="login_btn" type="button" class="btn btn-default btn-success btn_style">Login</button></div>
-		    	<div class="row">
+			    <div class="row" style="margin-top: 3px;" align="center">
+			    	<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+			    	<script>
+				      function onSignIn(googleUser) {
+				        // Useful data for your client-side scripts:
+				        var profile = googleUser.getBasicProfile();
+				        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+				        console.log('Full Name: ' + profile.getName());
+				        console.log('Given Name: ' + profile.getGivenName());
+				        console.log('Family Name: ' + profile.getFamilyName());
+				        console.log("Image URL: " + profile.getImageUrl());
+				        console.log("Email: " + profile.getEmail());
+				
+				        // The ID token you need to pass to your backend:
+				        var id_token = googleUser.getAuthResponse().id_token;
+				        console.log("ID Token: " + id_token);
+				      }
+				    </script>
+			    </div>
+		    	<div class="row" style="margin-top: 3px;">
 		    		<div class="col-md-1"></div>
 		    		<div class="col-md-3"><a href="memberInsertForm">
 		    			<i class="fas fa-user-plus" id="signup"> SignUp</i></a>

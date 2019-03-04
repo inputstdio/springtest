@@ -53,6 +53,11 @@ img {
 					<ul class="dropdown-menu">
 						<li><a href="venderInsertForm">거래처 등록</a>
 						<li><a href="venderList">거래처 조회</a>
+						<li><a href="productInsertForm">물품 등록</a>
+						<li><a href="productList">물품 조회</a>
+						<li><a href="balanceList">거래 현황</a>
+						<li><a href="buy">매입</a>
+						<li><a href="deadLine">마감</a>
 					</ul>
 				</div>
 				<div class="col-md-2">
